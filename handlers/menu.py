@@ -19,7 +19,7 @@ async def send_menu(message: types.Message, state: FSMContext):
         answer = ''
         for id, product, price in menu:
             answer = answer + str(id) + '; ' + product + '; Цена: ' + str(price) + '\n'
-    await message.answer(answer, reply_markup=kb_main)
+        await message.answer(answer, reply_markup=kb_main)
     await state.finish()
 
 def register_handlers(dp: Dispatcher):
