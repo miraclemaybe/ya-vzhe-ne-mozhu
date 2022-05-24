@@ -2,6 +2,7 @@ from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from database import commands as db
+from aiogram.dispatcher.filters import Text
 from keyboards import kb_main, kb_location
 
 class FSMDeliver(StatesGroup):
@@ -16,7 +17,7 @@ async def save_adress(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['adress'] = message.text
     await FSMDeliver.next()
-    await message.answer("Выберите из какого меню вы хотите заказать продукты(pizza, burgers, sushi, snacks, drink) и номер продукта")
+    await message.answer("Выберите из какого меню вы хотите заказать продукты(pizza, sushi, snacks) и номер продукта")
     await message.answer("Пример: sushi 2")
 
 async def products(message: types.Message, state: FSMContext):
@@ -34,8 +35,8 @@ async def cancel(message: types.Message, state: FSMContext):
     await message.reply("Действие отменено.", reply_markup=kb_main)
 
 def register_handlers(dp: Dispatcher):
-    dp.register_message_handler(get_adress, commands=['make_request'])
-    dp.register_message_handler(cancel, commands=['cancel'] , state='*')
+    dp.register_message_handler(get_adress, Text(equals='make_request', ignore_case=False))
+    dp.register_message_handler(cancel, Text(equals='cancel', ignore_case=False), state='*')
     dp.register_message_handler(save_adress, state=FSMDeliver.adress)
     dp.register_message_handler(products, state=FSMDeliver.product)
     

@@ -116,5 +116,22 @@ def insertData(id, name):
             sqlite_connection.close()
             print("Соединение с SQLite закрыто.")   
 
+def insert_feedback(author, review):
+    try:
+        sqlite_connection = sqlite3.connect("menu.db")
+        cursor = sqlite_connection.cursor()
+
+        insert_query = '''INSERT INTO reviews (author_review, review)
+                          VALUES (?, ?)'''
+
+        cursor.execute(insert_query, (author, review))
+        sqlite_connection.commit()
+        cursor.close()
+    except sqlite3.Error as error:
+        return error
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+
 
 

@@ -1,4 +1,5 @@
 from aiogram import Dispatcher, types
+from aiogram.dispatcher.filters import Text
 from keyboards import kb_main
 
 async def help(message: types.Message):

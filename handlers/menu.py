@@ -2,6 +2,7 @@ from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from database import commands as db
+from aiogram.dispatcher.filters import Text
 from keyboards import kb_menu, kb_main
 
 class FSMMenu(StatesGroup):
@@ -22,5 +23,5 @@ async def send_menu(message: types.Message, state: FSMContext):
     await state.finish()
 
 def register_handlers(dp: Dispatcher):
-    dp.register_message_handler(menu, commands=['menu'])
+    dp.register_message_handler(menu, Text(equals='menu', ignore_case=False))
     dp.register_message_handler(send_menu, state=FSMMenu.menu)
