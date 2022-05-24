@@ -35,7 +35,7 @@ async def cancel(message: types.Message, state: FSMContext):
     await message.reply("Действие отменено.", reply_markup=kb_main)
 
 def register_handlers(dp: Dispatcher):
-    dp.register_message_handler(feedback_get, Text(equals="give_feedback", ignore_case=False))
+    dp.register_message_handler(feedback_get, Text(equals="give feedback", ignore_case=False))
     dp.register_message_handler(cancel, Text(equals="cancel", ignore_case=False), state='*')
     dp.register_message_handler(insert_feedback, state=FSMReview.feedback)
     dp.register_message_handler(send_feedbacks, Text(equals="feedbacks", ignore_case=False))

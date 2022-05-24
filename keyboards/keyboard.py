@@ -1,11 +1,11 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-button_request = KeyboardButton('make_request')
+button_request = KeyboardButton('make request')
 button_menu = KeyboardButton('menu')
 button_cancel = KeyboardButton('cancel')
-button_location = KeyboardButton('send_location', request_location=True)
+button_location = KeyboardButton('send location', request_location=True)
 button_feedbacks = KeyboardButton('feedbacks')
-button_give_feedbacks = KeyboardButton('give_feedback')
+button_give_feedbacks = KeyboardButton('give feedback')
 
 kb_main = ReplyKeyboardMarkup(resize_keyboard=True)
 kb_main.add(button_request).add(button_menu).add(button_feedbacks).add(button_give_feedbacks)
