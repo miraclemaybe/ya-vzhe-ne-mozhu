@@ -1,0 +1,1 @@
+from handlers import menu, request, comment, start
