@@ -1,1 +1,1 @@
-API_TOKEN = 'ahah not now;)' 
+API_TOKEN = '' 

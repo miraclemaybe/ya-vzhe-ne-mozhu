@@ -1,8 +1,8 @@
 from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from database import commands as db
 from aiogram.dispatcher.filters import Text
+from database import commands as db
 from keyboards import kb_menu, kb_main
 
 class FSMMenu(StatesGroup):
@@ -15,7 +15,7 @@ async def menu(message: types.Message):
 async def send_menu(message: types.Message, state: FSMContext):
     async with state.proxy() as text:
         text['menu'] = message.text
-        menu = db.select_menu(message.text[1:])
+        menu = db.select_menu(message.text)
         answer = ''
         for id, product, price in menu:
             answer = answer + str(id) + '; ' + product + '; Цена: ' + str(price) + '\n'
